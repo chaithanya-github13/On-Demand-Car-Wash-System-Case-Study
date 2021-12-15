@@ -1,0 +1,27 @@
+server:
+ port: 8100
+     
+eureka:
+ instance:   hostname: localhost
+ 
+
+spring:
+ application:
+  name: Apigateway
+
+ cloud:
+  gateway:
+    routes:
+      - id: Customer
+        uri: http://localhost:8082/
+        predicates:
+          - Path=/Customers/**,/Ord/**,/Car/**
+         
+      - id: CarWasher
+        uri: http://localhost:8081/
+        predicates:
+          - Path=/Carwashers/**
+      - id: AdminMicroservice
+        uri: http://localhost:8080/
+        predicates:
+          - Path=/Admin/**
